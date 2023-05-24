@@ -14,10 +14,13 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array
      */
+    protected $table = 'Usuario';
+
     protected $fillable = [
-        'name',
-        'email',
+        'username',        
         'password',
+        'last_login',
+        'role',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -34,7 +37,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'last_login' => 'datetime'      
     ];
     
     /**
