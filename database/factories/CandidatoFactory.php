@@ -3,12 +3,13 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Support\Str;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class CandidatoFactory extends Factory
 {
 
     /**
@@ -18,10 +19,12 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $users = User::pluck('id')->toArray();
         return [
-            'username' => fake()->userName(),                  
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'role' => rand(0, 1) ? 'manager' : 'agent',
+            'name' => fake()->name(),                  
+            'source' => Str::random(255),
+            'owner' => $this->faker->randomElement($users),
+            'created_by' => $this->faker->randomElement($users)
         ];
     }
    

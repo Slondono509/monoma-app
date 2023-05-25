@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CandidatoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,9 +18,18 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/', [AuthController::class, 'login']);
+    // Route::get('/', [AuthController::class, 'login'])->name('login');
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
 });
+
+
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::resource('lead', CandidatoController::class);
+});
+
+// 

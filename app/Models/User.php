@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Models\Candidato;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -56,4 +57,17 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }    
+
+    
+    public function created_by()
+    {
+        return $this->hasMany(Candidato::class, 'created_by');
+    }
+
+    public function owner()
+    {
+        return $this->hasMany(Candidato::class, 'owner');
+    }
+
+
 }

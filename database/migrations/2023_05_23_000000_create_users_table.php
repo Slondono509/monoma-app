@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();            
             $table->string('username')->unique();            
             $table->string('password');
-            $table->dateTime('last_login');
+            $table->dateTime('last_login')->useCurrent();;
             $table->string('role');
             $table->boolean('is_active')->default(true);
             $table->rememberToken();

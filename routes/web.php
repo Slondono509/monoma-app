@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/error', function () {
+    return response()->json([ 
+        'meta' => array(
+            "success"=> false,
+            "errors"=> ["Token expired"]
+        )
+    ], 401);
+})->name('error');
